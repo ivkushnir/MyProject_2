@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" ng-app="fsApp">
+<link>
+<meta charset="utf-8">
+<title>File System Manager</title>
+
+<!--for bootstrap-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<!--<link type="text/css" rel="stylesheet" src="css/bootstrap-theme.min.css">-->
+<link rel="stylesheet" href="css/app.css">
+<!--работающее:-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>-->
+<!--<script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.min.js"></script>-->
+
+<script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script>
+<script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css"
+      href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<!--для больших иконок-->
+
+<script src="js/controllers.js"></script>
+<script src="js/filters.js"></script>
+<!--фильтр для иконок папка\файл-->
+<script src="js/go.js"></script>
+
+</head>
+<!---------------------------------------------------------------------------------------->
+
+<body>
+
+<div class="row">
+    <!--ввод адреса сервера-->
+
+    <!--<div ng-controller="MyFormController">-->
+    <!--<form ng-submit="add(field)">-->
+
+    <!--<div class="col-lg-4">-->
+    <!--<div class="input-group">-->
+    <!--<input type="text" class="form-control" ng-model="field" placeholder="Input ID of Server:..."/>-->
+    <!--<span class="input-group-btn">-->
+    <!--<button class="btn btn-default" id="button_connect" type="submit" >Go!</button>-->
+    <!--</span>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--</div>-->
+
+    <div class="col-lg-4">
+        <div class="input-group">
+            <input type="text" class="form-control" name="field_ip" value="http://localhost:8000/C://"
+                   placeholder="Input ID of Server: (http://localhost:8000/C://)"/>
+           <span class="input-group-btn">
+             <button class="btn btn-default" id="button_connect" type="submit"><i class="fa fa-plug"></i></button>
+             <!--<input  class="btn btn-default" onClick="Go(field)" type="button" >Go!</button>-->
+           </span>
+
+        </div>
+    </div>
+
+
+</div>
+
+<br>
+
+
+<!--файловый менеджер-->
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-4 col-md-offset-2"> <!--col-md-offset-1 отступ слева-->
+            <h2><i class="fa fa-cloud"></i> Server</h2>
+
+            <div ng-controller="fsListCtrl_1">
+
+                <!-- вывод кнопки Назад и строки с текущим адресом-->
+                <button class="btn btn-default" type="button" id="btnB1" ng-click="PreviousList1()">
+                    <i class="fa fa-arrow-left"></i> назад...
+                </button>
+                {{track1}}
+
+                <div class="scroll">
+                    <ul class="list-group">
+
+                        <!-- вывод в цикле плюс сортировка:вверху папки, внизу файлы по алфавиту-->
+                        <li ng-repeat="doc in docs | orderBy:['isFile', 'name']" class="list-group-item">
+
+                            <div class="dd-handle">
+
+                                <a ng-click="NewList1(doc)">
+                                    {{doc.isFile | checkmark}} {{doc.name}}
+                                </a>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <h2><i class="fa fa-home"></i> Your computer</h2>
+
+
+            <div ng-controller="fsListCtrl_2">
+
+                <!-- вывод кнопки Назад и строки с текущим адресом-->
+                <button class="btn btn-default" type="button" id="btnB2" ng-click="PreviousList2()">
+                    <i class="fa fa-arrow-left"></i> назад...
+                </button>
+                {{track2}}
+
+                <div class="scroll">
+
+                    <ul class="list-group">
+                        <!-- вывод в цикле плюс сортировка:вверху папки, внизу файлы по алфавиту-->
+                        <li ng-repeat="doc in docs | orderBy:['isFile', 'name']" class="list-group-item">
+
+                            <div class="dd-handle">
+
+                                <a ng-click="NewList2(doc)">
+                                    {{doc.isFile | checkmark}} {{doc.name}}
+                                </a>
+
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--кнопки-->
+<br><br>
+
+<div class="row">
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" onclick="sendMes()" class="btn btn-default">Copy</button>
+        <button type="button" class="btn btn-default">Insert</button>
+    </div>
+</div>
+</div>
+<!---------------------------------------------------------------------------------------->
+
+</body>
+
+</html>
+
+
